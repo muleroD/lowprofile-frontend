@@ -1,7 +1,7 @@
 <template>
-  <el-row>
-    <el-col :span="8" :offset="8">
-      <el-card shadow="never" class="card-center" :body-style="{ padding: '3.75rem' }">
+  <el-row type="flex" justify="center">
+    <el-col :xs="24" :sm="12" :md="10" :lg="8" :xl="6">
+      <el-card shadow="never" class="card-center">
         <el-row>
           <img src="~/assets/icons/devchallenges.svg" />
         </el-row>
@@ -15,11 +15,12 @@
         </el-row>
 
         <el-row>
-          <el-input placeholder="Password" prefix-icon="el-icon-search" v-model="user.password"> </el-input>
+          <el-input placeholder="Password" type="password" prefix-icon="el-icon-search" v-model="user.password">
+          </el-input>
         </el-row>
 
         <el-row>
-          <el-button type="primary">Login</el-button>
+          <el-button class="btn-login" @click="enterUser()">Login</el-button>
         </el-row>
       </el-card>
     </el-col>
@@ -34,6 +35,12 @@ export default {
     return {
       user: { email: "", password: "" }
     };
+  },
+
+  methods: {
+    enterUser() {
+      this.$services.auth.login(this.user);
+    }
   }
 };
 </script>
@@ -42,5 +49,13 @@ export default {
 .card-center {
   border-color: #bdbdbd;
   border-radius: 24px;
+}
+
+.btn-login {
+  min-width: 100%;
+  background: #2f80ed;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
 }
 </style>
